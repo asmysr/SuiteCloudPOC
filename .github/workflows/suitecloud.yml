@@ -8,6 +8,6 @@ jobs:
     name: Deploy to Production (main)
     runs-on: ubuntu-latest
     steps:
-      - run: ls
       - run: npm install -g --acceptSuiteCloudSDKLicense @oracle/suitecloud-cli
+      - run: cd ./com.servicerocket.clipoc
       - run: suitecloud account:savetoken ${{secrets.NS_TOKEN_ID}} --tokensecret ${{secrets.NS_TOKEN_SECRET}}
