@@ -8,6 +8,7 @@ jobs:
     name: Deploy to Production (main)
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - run: npm install -g --acceptSuiteCloudSDKLicense @oracle/suitecloud-cli
       - run: |
           cd ./com.servicerocket.clipoc
