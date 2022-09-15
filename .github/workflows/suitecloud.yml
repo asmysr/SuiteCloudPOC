@@ -13,4 +13,4 @@ jobs:
           cd ./com.servicerocket.clipoc
           npm install
           npm install -g --acceptSuiteCloudSDKLicense @oracle/suitecloud-cli
-          suitecloud account:savetoken ${{secrets.NS_TOKEN_ID}} --tokensecret ${{secrets.NS_TOKEN_SECRET}}
+          suitecloud account:savetoken -tokenid ${{secrets.NS_TOKEN_ID}} -tokensecret ${{secrets.NS_TOKEN_SECRET}}
