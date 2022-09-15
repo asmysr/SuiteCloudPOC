@@ -1,8 +1,0 @@
-name: SuiteCloudPOC CLI
-on: [push]
-jobs:
-  SuiteCloudCLI:
-    runs-on: ubuntu-latest
-    steps:
-      - run: npm install -g --acceptSuiteCloudSDKLicense @oracle/suitecloud-cli
-      - run: suitecloud authenticate ${{secrets.NS_TOKEN_ID}} --tokensecret ${{secrets.NS_TOKEN_SECRET}}
