@@ -1,7 +1,11 @@
 name: SuiteCloudPOC CLI
-on: [push]
+on:
+  workflow_dispatch:
+  
 jobs:
-  SuiteCloudCLI:
+  deploy-production:
+    environment: production
+    name: Deploy to Production (main)
     runs-on: ubuntu-latest
     steps:
       - run: npm install -g --acceptSuiteCloudSDKLicense @oracle/suitecloud-cli
