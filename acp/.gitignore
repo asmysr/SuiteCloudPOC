@@ -36,5 +36,3 @@ Thumbs.db
 # Output of 'npm pack'
 *.tgz
 
-# Project config
-project.json
