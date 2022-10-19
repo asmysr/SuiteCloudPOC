@@ -1,0 +1,20 @@
+name: Deploy CustomScript
+on:
+  workflow_dispatch:
+  
+jobs:
+  deploy-production:
+    environment: production
+    name: Deploy to Production (main)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'microsoft'
+          java-version: '17'
+      - run: |
+          cd ./acp
+          npm install -g --acceptSuiteCloudSDKLicense @oracle/suitecloud-cli
+          suitecloud account:savetoken --account ${{secrets.SRDEVACC2_AID}} --authid "q" --tokenid ${{secrets.NS_TOKEN_ID}} --tokensecret ${{secrets.NS_TOKEN_SECRET}}
+          suitecloud file:upload --paths "/SuiteScripts/UserEventScript.js"  "/SuiteScripts/Jira/api/jira.js" "/SuiteScripts/Jira/rl/jirarl.js" "/SuiteScripts/Jira/api/lib/issue.js" "/SuiteScripts/Jira/api/lib/project.js" "/SuiteScripts/Jira/api/lib/ticket.js"
