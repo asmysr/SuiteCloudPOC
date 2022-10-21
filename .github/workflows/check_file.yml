@@ -18,7 +18,7 @@ jobs:
         uses: tj-actions/changed-files@v32
         with:
           files: |
-            SuiteCloudPOC/acp/src/FileCabinet/SuiteScripts/**
+            ./acp/src/FileCabinet/SuiteScripts/**
       - name: Run step if any file(s) in the docs folder change
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         run: |
