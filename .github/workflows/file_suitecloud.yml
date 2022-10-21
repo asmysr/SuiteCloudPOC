@@ -13,8 +13,19 @@ jobs:
         with:
           distribution: 'microsoft'
           java-version: '17'
+      - name: Get changed files in the SuiteScripts folder
+        id: changed-files-specific
+        uses: tj-actions/changed-files@v32
+        with:
+          files: |
+            .acp/src/FileCabinet/SuiteScripts/**
+      - name: Run step if any file(s) in the SuiteScript folder change
+        if: steps.changed-files-specific.outputs.any_changed == 'true'
       - run: |
           cd ./acp
           npm install -g --acceptSuiteCloudSDKLicense @oracle/suitecloud-cli
           suitecloud account:savetoken --account ${{secrets.SRDEVACC2_AID}} --authid "q" --tokenid ${{secrets.NS_TOKEN_ID}} --tokensecret ${{secrets.NS_TOKEN_SECRET}}
-          suitecloud file:upload --paths "/SuiteScripts/UserEventScript.js"  "/SuiteScripts/Jira/api/jira.js" "/SuiteScripts/Jira/rl/jirarl.js" "/SuiteScripts/Jira/api/lib/issue.js" "/SuiteScripts/Jira/api/lib/project.js" "/SuiteScripts/Jira/api/lib/ticket.js"
+          for i in "${{ steps.changed-files-specific.outputs.all_changed_files }}"
+          do
+              suitecloud file:upload --paths "$i"
+          done
