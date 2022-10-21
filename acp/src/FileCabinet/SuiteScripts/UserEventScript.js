@@ -20,7 +20,7 @@ define([],
                     var  customRecord = scriptContext.newRecord;
                     customRecord.setValue({
                         fieldId: 'custrecord_tut_memo',
-                        value: 'My first account customization project'
+                        value: 'My first account customization projects'
                     });
                 }
             } 
